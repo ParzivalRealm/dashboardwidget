@@ -1,0 +1,13 @@
+{
+  "Widget": {
+    "demo": {
+      "Sum": "Summe",
+      "Index": "Nummer",
+
+      "Value": "Wert",
+      "Property1": "Eigenschaft 1",
+      "Property2": "Eigenschaft 2",
+      "Property3": "Eigenschaft 3"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+div.content {
+  text-align: center;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.widget-head th {
+  border: 1px solid black;
+  background-color: lightgray;
+}
+.widget-footer td {
+  // border: 1px solid black;
+  font-weight: bolder;
+}
+
+th,
+td {
+  padding: 5px;
+}

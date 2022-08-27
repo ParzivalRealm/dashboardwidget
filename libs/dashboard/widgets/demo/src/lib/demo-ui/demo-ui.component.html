@@ -1,0 +1,44 @@
+<div class="content">
+  <ng-container *ngIf="isDataArray(value)">
+    <table rules="all">
+      <tr class="widget-head">
+        <th>
+          {{ 'WDK_demo.Widget.demo.Index' | translate }}
+        </th>
+        <th>
+          {{ 'WDK_demo.Widget.demo.Value' | translate }}
+        </th>
+      </tr>
+      <tr class="widget-row" *ngFor="let valueData of value; let i = index">
+        <td>
+          {{ i }}
+        </td>
+
+        <ng-container *ngIf="isNumber(valueData)">
+          <td class="widget-value">{{ valueData | number: '1.0-3' }}</td>
+        </ng-container>
+
+        <ng-container *ngIf="isString(valueData)">
+          <td class="widget-value">{{ valueData }}</td>
+        </ng-container>
+      </tr>
+      <tr class="widget-footer">
+        <td>
+          {{ 'WDK_demo.Widget.demo.Sum' | translate }}
+        </td>
+        <td>{{ sumValue | number: '1.0-3' }}</td>
+      </tr>
+    </table>
+  </ng-container>
+
+  <div class="widget-separator"><br /></div>
+  <div class="widget-setting-property1">
+    {{ 'WDK_demo.Widget.demo.Property1' | translate }}: {{ property1 }}
+  </div>
+  <div class="widget-setting-property2">
+    {{ 'WDK_demo.Widget.demo.Property2' | translate }}: {{ property2 }}
+  </div>
+  <div class="widget-setting-property3">
+    {{ 'WDK_demo.Widget.demo.Property3' | translate }}: {{ property3 }}
+  </div>
+</div>

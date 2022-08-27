@@ -7,7 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,7 @@
     "@angular/platform-browser": "^12.2.0",
     "@angular/platform-browser-dynamic": "^12.2.0",
     "@angular/router": "^12.2.0",
+    "@etm-professional-control/widget-development-kit": "^3.0.1",
     "@nrwl/angular": "12.10.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

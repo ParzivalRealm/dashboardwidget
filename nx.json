@@ -27,12 +27,18 @@
     ]
   },
   "projects": {
+    "dashboard-widgets-demo": {
+      "tags": []
+    },
     "example-app": {
       "tags": []
     },
     "example-app-e2e": {
       "tags": [],
       "implicitDependencies": ["example-app"]
+    },
+    "widgets-demo": {
+      "tags": []
     }
   }
 }

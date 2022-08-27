@@ -1,0 +1,154 @@
+<wui-form [formGroup]="settingsForm">
+  <wui-container-group>
+    <wui-container
+      [type]="ContainerType.Default"
+      [control]="this.settingsForm.get('generalSettings')"
+    >
+      <wui-container-title>
+        {{ 'WUI_Dashboard.Widget.General' | translate }}
+      </wui-container-title>
+      <wui-container-content>
+        <wui-general-settings
+          formControlName="generalSettings"
+          [data]="getData(settingsForm) ?? []"
+        ></wui-general-settings>
+      </wui-container-content>
+    </wui-container>
+    <wui-container
+      [type]="ContainerType.Collapsable"
+      [collapsed]="collapsed"
+      [controls]="[
+        this.settingsForm.get('data'),
+        this.settingsForm.get('generalDataSettings')
+      ]"
+    >
+      <wui-container-title>
+        {{ 'WUI_Dashboard.Widget.Data' | translate }}
+      </wui-container-title>
+
+      <wui-container-content formArrayName="data">
+        <div
+          style="text-align: right; flex-grow: 1"
+          *ngIf="series?.controls && series.controls.length < 10"
+        >
+          <sie-button
+            data-cy="button_trend_settings_addSeries"
+            [type]="ButtonType.Secondary"
+            (click)="addSeries()"
+            class="button--secondary"
+            >{{ 'WUI_Dashboard.Widget.Trend.AddSerie' | translate }}
+          </sie-button>
+        </div>
+
+        <wui-container
+          [type]="ContainerType.Collapsable"
+          [collapsed]="false"
+          *ngFor="let serie of this.series.controls; let i = index"
+        >
+          <wui-container-title>
+            {{
+              'WUI_Dashboard.Widget.Trend.Series.Serie'
+                | translate: { i: i + 1 }
+            }}
+            <span *ngIf="!!serie.value.dataPath">
+              :
+              <wui-data-display-name
+                [data]="serie.value"
+              ></wui-data-display-name
+            ></span>
+          </wui-container-title>
+          <wui-container-title-actions>
+            <sie-button
+              [attr.data-cy]="'button_trend_settings_delete_series_' + i"
+              [type]="ButtonType.Ghost"
+              (click)="removeSerie(serie)"
+              [icon]="Icon.Delete"
+              [iconOnly]="true"
+              class="button-right"
+            ></sie-button>
+          </wui-container-title-actions>
+          <wui-container-content>
+            <!-- name & dpe -->
+            <wui-form-group
+              [size]="InputGroupSize.Large"
+              for="input_dpe_{{ i }}"
+              [control]="serie"
+            >
+              <wui-data-selector-input
+                [dataTypes]="dataTypes"
+                formControlName="{{ i }}"
+                id="input_dpe_{{ i }}"
+              ></wui-data-selector-input>
+            </wui-form-group>
+          </wui-container-content>
+        </wui-container>
+      </wui-container-content>
+    </wui-container>
+
+    <wui-container
+      [type]="ContainerType.Collapsable"
+      [collapsed]="collapsed"
+      [controls]="[
+        this.settingsForm.get('property1'),
+        this.settingsForm.get('property2'),
+        this.settingsForm.get('property3')
+      ]"
+    >
+      <wui-container-title>
+        {{ 'WUI_Dashboard.Widget.Options' | translate }}
+      </wui-container-title>
+      <wui-container-content>
+        <wui-form-group
+          [size]="InputGroupSize.Medium"
+          [omitInputGroup]="true"
+          for="property1"
+        >
+          <wui-input-group
+            [label]="'WDK_demo.Widget.demo.Property1' | translate"
+            description="Text property"
+            [size]="InputGroupSize.Medium"
+            [control]="this.settingsForm.get('property1')"
+            for="property1"
+          >
+            <input
+              sieInputText
+              data-cy="input_settings_property1"
+              type="text"
+              id="property1"
+              formControlName="property1"
+            />
+          </wui-input-group>
+          <sie-form-group-line-break> </sie-form-group-line-break>
+
+          <wui-input-group for="property2" [size]="InputGroupSize.Medium">
+            <wui-checkbox
+              [size]="InputGroupSize.Medium"
+              [label]="'WDK_demo.Widget.demo.Property2' | translate"
+              data-cy="checkbox_settings_property2"
+              formControlName="property2"
+              for="property2"
+            ></wui-checkbox>
+          </wui-input-group>
+          <sie-form-group-line-break> </sie-form-group-line-break>
+
+          <wui-input-group
+            [label]="'WDK_demo.Widget.demo.Property3' | translate"
+            description="Text property"
+            [size]="InputGroupSize.Medium"
+            [control]="this.settingsForm.get('property3')"
+            for="property1"
+          >
+            <input
+              sieInputText
+              data-cy="input_settings_property3"
+              type="number"
+              id="property3"
+              formControlName="property3"
+            />
+          </wui-input-group>
+        </wui-form-group>
+      </wui-container-content>
+    </wui-container>
+  </wui-container-group>
+</wui-form>
+<!-- <pre>{{ settingsForm.value | json }}</pre> -->

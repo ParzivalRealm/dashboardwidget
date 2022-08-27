@@ -1,0 +1,39 @@
+{
+  "types": [
+    "time",
+    "bool",
+    "string",
+    "langString",
+
+    "int",
+    "float",
+    "long",
+    "uint",
+    "ulong"
+  ],
+  "widgetType": "demo",
+  "label": {
+    "de.utf8": "My First Widget",
+    "en.utf8": "My First Widget"
+  },
+  "description": {
+    "de.utf8": "a basic example implementation of a dashboard widget.",
+    "en.utf8": "a basic example implementation of a dashboard widget."
+  },
+  "size": {
+    "minRows": 6,
+    "minCols": 6
+  },
+  "defaultSettings": {
+    "property1": "Default Value",
+    "property2": false,
+    "property3": 10
+  },
+  "svgFile": "data/WebUI/widgets/demo.svg",
+  "moduleFederationSettings": {
+    "remoteEntry": "/data/WebUI/components/demo/remoteEntry.js",
+    "remoteEntryDev": "http://127.0.0.1:4201/remoteEntry.js",
+    "remoteName": "demo",
+    "exposedModule": "./Module"
+  }
+}

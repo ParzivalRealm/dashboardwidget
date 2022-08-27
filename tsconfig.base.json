@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@etm-professional-control/dashboard/widgets/demo": [
+        "libs/dashboard/widgets/demo/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

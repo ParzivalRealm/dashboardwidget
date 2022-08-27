@@ -1,6 +1,31 @@
 {
   "version": 1,
   "projects": {
+    "dashboard-widgets-demo": {
+      "projectType": "library",
+      "root": "libs/dashboard/widgets/demo",
+      "sourceRoot": "libs/dashboard/widgets/demo/src",
+      "prefix": "wui",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dashboard/widgets/demo"],
+          "options": {
+            "jestConfig": "libs/dashboard/widgets/demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/dashboard/widgets/demo/src/**/*.ts",
+              "libs/dashboard/widgets/demo/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "example-app": {
       "projectType": "application",
       "root": "apps/example-app",
@@ -117,6 +142,120 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["apps/example-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "widgets-demo": {
+      "projectType": "application",
+      "root": "apps/widgets/demo",
+      "sourceRoot": "apps/widgets/demo/src",
+      "prefix": "wui",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "outputs": [
+            "{options.outputPath}",
+            "dist/data/WebUI/widgets",
+            "dist/data/WebUI/msg"
+          ],
+          "options": {
+            "outputPath": "dist/data/WebUI/components/demo",
+            "index": "apps/widgets/demo/src/index.html",
+            "main": "apps/widgets/demo/src/main.ts",
+            "polyfills": "apps/widgets/demo/src/polyfills.ts",
+            "tsConfig": "apps/widgets/demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/widgets/demo/src/favicon.ico",
+              "apps/widgets/demo/src/assets",
+              {
+                "glob": "**/*",
+                "input": "apps/widgets/demo/data/WebUI",
+                "output": "src/../../../"
+              }
+            ],
+            "styles": ["apps/widgets/demo/src/styles.scss"],
+            "scripts": [],
+            "extraWebpackConfig": "apps/widgets/demo/webpack.config.js",
+            "commonChunk": false,
+            "resourcesOutputPath": "assets"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/widgets/demo/src/environments/environment.ts",
+                  "with": "apps/widgets/demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "bundles",
+              "extraWebpackConfig": "apps/widgets/demo/webpack.prod.config.js",
+              "optimization": false,
+              "deployUrl": "/data/WebUI/components/demo/"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "widgets-demo:build:production",
+              "extraWebpackConfig": "apps/widgets/demo/webpack.prod.config.js"
+            },
+            "development": {
+              "browserTarget": "widgets-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4201,
+            "extraWebpackConfig": "apps/widgets/demo/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "widgets-demo:build",
+            "extraWebpackConfig": "apps/widgets/demo/webpack.config.js"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/widgets/demo/src/**/*.ts",
+              "apps/widgets/demo/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/widgets/demo"],
+          "options": {
+            "jestConfig": "apps/widgets/demo/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
